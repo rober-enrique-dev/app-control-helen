@@ -4,47 +4,87 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Helen Premium</title>
+    
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
-    <link rel="manifest" href="manifest.json?v=1">
-    <link rel="icon" type="image/png" href="icon.png?v=1">
+    
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" type="image/png" href="icon.png">
     <meta name="theme-color" content="#FF6600">
 
     <style>
-        :root { --naranja: #FF6600; --fondo: #F8F9FD; --verde: #00B894; --rojo: #FF3860; }
+        :root { --naranja: #FF6600; --fondo: #F8F9FD; --verde: #00B894; --rojo: #FF4757; }
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Outfit', sans-serif; -webkit-tap-highlight-color: transparent; }
+        
         body { background: var(--fondo); height: 100vh; display: flex; flex-direction: column; overflow: hidden; }
 
-        /* HEADER */
-        .header { background: linear-gradient(135deg, var(--naranja), #FF8C42); padding: 30px 25px 40px; border-bottom-left-radius: 40px; border-bottom-right-radius: 40px; display: flex; justify-content: space-between; align-items: center; }
+        /* CABECERA */
+        .header {
+            background: linear-gradient(135deg, var(--naranja), #FF8C42);
+            padding: 30px 25px 45px;
+            border-bottom-left-radius: 40px; border-bottom-right-radius: 40px;
+            display: flex; justify-content: space-between; align-items: center;
+            box-shadow: 0 10px 25px rgba(255, 102, 0, 0.2);
+        }
         .header h1 { color: white; font-size: 24px; font-weight: 800; }
         .avatar { width: 50px; height: 50px; background: rgba(255,255,255,0.2); border: 2px solid white; border-radius: 15px; display: flex; justify-content: center; align-items: center; color: white; font-weight: 800; }
 
-        /* PESTAÑAS (TABS) - AQUÍ SE SEPARA TODO */
-        .tabs { display: flex; justify-content: space-around; padding: 0 20px; margin-top: -20px; gap: 10px; }
-        .tab-btn { background: white; border: none; padding: 12px 20px; border-radius: 15px; font-weight: 800; color: #AAA; flex: 1; box-shadow: 0 5px 15px rgba(0,0,0,0.05); font-size: 13px; }
-        .tab-btn.active { background: var(--naranja); color: white; }
+        /* PESTAÑAS (TABS) */
+        .tabs { display: flex; justify-content: space-around; padding: 0 20px; margin-top: -25px; gap: 10px; }
+        .tab-btn { 
+            background: white; border: none; padding: 15px; border-radius: 20px; 
+            font-weight: 800; color: #AAA; flex: 1; 
+            box-shadow: 0 8px 15px rgba(0,0,0,0.05); font-size: 12px;
+            transition: all 0.3s;
+        }
+        .tab-btn.active { background: var(--naranja); color: white; transform: translateY(-3px); }
 
-        /* RESUMEN SEGÚN PESTAÑA */
+        /* RESUMEN */
         .summary { padding: 20px; }
-        .card-stat { background: white; padding: 20px; border-radius: 24px; text-align: center; box-shadow: 0 8px 25px rgba(0,0,0,0.05); }
-        .card-stat p { font-size: 11px; color: #999; text-transform: uppercase; font-weight: 700; margin-bottom: 5px; }
-        .card-stat h2 { font-size: 26px; font-weight: 800; }
+        .card-stat { 
+            background: white; padding: 25px; border-radius: 25px; 
+            text-align: center; box-shadow: 0 10px 20px rgba(0,0,0,0.02);
+            border: 1px solid rgba(255,102,0,0.05);
+        }
+        .card-stat p { font-size: 11px; color: #888; text-transform: uppercase; font-weight: 700; margin-bottom: 5px; }
+        .card-stat h2 { font-size: 28px; font-weight: 800; }
 
-        /* LISTA */
-        #list-section { flex: 1; overflow-y: auto; padding: 0 20px 100px; }
-        .item-card { background: white; padding: 15px; border-radius: 20px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; animation: fadeIn 0.4s; }
-        .item-info h3 { font-size: 15px; font-weight: 800; }
+        /* LISTA DINÁMICA */
+        #list-section { flex: 1; overflow-y: auto; padding: 0 20px 120px; }
+        .instruccion { text-align: center; font-size: 10px; color: #BBB; margin-bottom: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+        
+        .item-card { 
+            background: white; padding: 18px; border-radius: 22px; 
+            display: flex; justify-content: space-between; align-items: center; 
+            margin-bottom: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+            animation: slideInUp 0.5s ease;
+        }
+        
+        .item-info h3 { font-size: 15px; font-weight: 800; color: #333; text-transform: capitalize; }
         .item-info span { font-size: 11px; color: #AAA; }
         .item-price { font-size: 16px; font-weight: 800; }
 
-        /* BOTÓN Y MODAL */
-        .btn-add { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); background: var(--naranja); color: white; padding: 18px 45px; border-radius: 35px; font-weight: 800; border: none; box-shadow: 0 10px 25px rgba(255,102,0,0.4); z-index: 100; }
+        /* BOTÓN FLOTANTE */
+        .btn-add { 
+            position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); 
+            background: var(--naranja); color: white; padding: 18px 45px; 
+            border-radius: 35px; font-weight: 800; border: none; 
+            box-shadow: 0 10px 25px rgba(255,102,0,0.4); z-index: 100;
+            font-size: 15px;
+        }
+
+        /* MODAL */
         .modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); display: none; align-items: flex-end; z-index: 1000; }
         .modal.active { display: flex; }
-        .modal-content { background: white; width: 100%; padding: 30px; border-top-left-radius: 40px; border-top-right-radius: 40px; }
-        input, select { width: 100%; padding: 16px; margin-bottom: 12px; border-radius: 15px; border: 2px solid #F0F0F0; font-size: 16px; outline: none; }
-        .btn-save { background: var(--naranja); color: white; width: 100%; padding: 18px; border: none; border-radius: 15px; font-weight: 800; }
+        .modal-content { 
+            background: white; width: 100%; padding: 35px 25px; 
+            border-top-left-radius: 40px; border-top-right-radius: 40px; 
+            animation: slideInUp 0.3s;
+        }
+
+        input, select { width: 100%; padding: 18px; margin-bottom: 12px; border-radius: 18px; border: 2px solid #F0F0F0; font-size: 16px; outline: none; background: #F9FAFB; }
+        .btn-save { background: var(--naranja); color: white; width: 100%; padding: 18px; border: none; border-radius: 18px; font-weight: 800; font-size: 17px; }
+
+        @keyframes slideInUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
     </style>
 </head>
 <body>
@@ -54,8 +94,8 @@
     </div>
 
     <div class="tabs">
-        <button class="tab-btn active" onclick="switchTab('yanbal')">REVISTA YANBAL</button>
-        <button class="tab-btn" onclick="switchTab('personales')">GASTOS PERSONALES</button>
+        <button id="tab-yanbal" class="tab-btn active" onclick="switchTab('yanbal')">REVISTA YANBAL</button>
+        <button id="tab-personales" class="tab-btn" onclick="switchTab('personales')">GASTOS PERSONALES</button>
     </div>
 
     <div class="summary">
@@ -65,23 +105,26 @@
         </div>
     </div>
 
-    <div id="list-section"><div id="list-container"></div></div>
+    <div id="list-section">
+        <p class="instruccion">Toca un registro para confirmar pago</p>
+        <div id="list-container"></div>
+    </div>
 
     <button class="btn-add" id="btn-open">NUEVO REGISTRO</button>
 
     <div class="modal" id="modal-form">
         <div class="modal-content">
-            <h2 style="margin-bottom: 20px;">Agregar Registro</h2>
+            <h2 style="margin-bottom: 20px; font-weight: 800;">Nuevo Registro</h2>
             <select id="input-tipo">
                 <option value="yanbal">Para la Revista Yanbal</option>
                 <option value="personales">Gasto Personal</option>
             </select>
-            <input type="text" id="input-nombre" placeholder="¿Quién o qué es?">
-            <input type="text" id="input-detalle" placeholder="Detalle (Ej: Labial, Comida)">
+            <input type="text" id="input-nombre" placeholder="¿Quién o qué concepto es?">
+            <input type="text" id="input-detalle" placeholder="Detalle (Ej: Labial, Pasajes)">
             <input type="text" id="input-visible" placeholder="Monto $">
             <input type="hidden" id="input-real">
-            <button class="btn-save" id="btn-save">GUARDAR</button>
-            <button onclick="document.getElementById('modal-form').classList.remove('active')" style="width:100%; margin-top:15px; background:none; border:none; color:#AAA;">Cancelar</button>
+            <button class="btn-save" id="btn-save">GUARDAR REGISTRO</button>
+            <button onclick="document.getElementById('modal-form').classList.remove('active')" style="width:100%; margin-top:15px; border:none; background:none; color:#AAA; font-weight: 600;">Cerrar</button>
         </div>
     </div>
     <script src="script.js"></script>

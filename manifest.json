@@ -1,11 +1,16 @@
 {
-  "name": "Helen Premium | Yanbal",
-  "short_name": "Helen App",
-  "start_url": "index.html",
+  "name": "Control Helen",
+  "short_name": "Helen",
+  "start_url": "./index.html",
   "display": "standalone",
-  "background_color": "#FF6600",
-  "theme_color": "#FF6600",
+  "background_color": "#ff7a00",
+  "theme_color": "#ff7a00",
   "icons": [
+    {
+      "src": "icon.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
     {
       "src": "icon.png",
       "sizes": "512x512",
