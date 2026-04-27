@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Helen Control Pro | Yanbal</title>
+    <style>
+        :root {
+            --naranja-yanbal: #FF6600;
+            --naranja-oscuro: #E65C00;
+            --blanco: #FFFFFF;
+            --fondo: #f0f2f5;
+            --texto: #333333;
+            --sombra: rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            background-color: var(--fondo);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .card {
+            background: var(--blanco);
+            width: 90%;
+            max-width: 380px;
+            padding: 2.5rem;
+            border-radius: 24px;
+            box-shadow: 0 15px 35px var(--sombra);
+            text-align: center;
+            border-top: 10px solid var(--naranja-yanbal);
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .icon-box {
+            font-size: 55px;
+            margin-bottom: 15px;
+            filter: drop-shadow(0 5px 10px rgba(0,0,0,0.1));
+        }
+
+        .brand-label {
+            color: var(--naranja-yanbal);
+            font-size: 0.75rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 2.5px;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        h1 {
+            color: var(--texto);
+            font-size: 1.8rem;
+            margin: 10px 0;
+            font-weight: 700;
+        }
+
+        p {
+            color: #666;
+            font-size: 1rem;
+            line-height: 1.5;
+            margin-bottom: 25px;
+        }
+
+        .btn-main {
+            background-color: var(--naranja-yanbal);
+            color: white;
+            border: none;
+            width: 100%;
+            padding: 16px;
+            border-radius: 14px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 8px 20px rgba(255, 102, 0, 0.25);
+            transition: all 0.3s ease;
+        }
+
+        .btn-main:hover {
+            background-color: var(--naranja-oscuro);
+            box-shadow: 0 10px 25px rgba(255, 102, 0, 0.35);
+        }
+
+        footer {
+            position: absolute;
+            bottom: 20px;
+            color: #aaa;
+            font-size: 0.75rem;
+            letter-spacing: 0.5px;
+        }
+
+        strong {
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+
+    <main class="card">
+        <div class="icon-box">📦</div>
+        <span class="brand-label">Gestión Pro</span>
+        <h1>¡Hola, Helen!</h1>
+        <p>¿Lista para organizar tus ventas y gastos de hoy?</p>
+        
+        <button class="btn-main">EMPEZAR AHORA</button>
+    </main>
+
+    <footer>
+        V.1.0 | Desarrollado por <strong>rober-enrique-dev</strong>
+    </footer>
+
+</body>
+</html>
