@@ -2,120 +2,256 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Helen Control Pro | Yanbal</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Helen Premium | Yanbal Edition</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --naranja-yanbal: #FF6600;
-            --naranja-oscuro: #E65C00;
-            --blanco: #FFFFFF;
-            --fondo: #f0f2f5;
-            --texto: #333333;
-            --sombra: rgba(0, 0, 0, 0.1);
+        :root { 
+            --naranja: #FF6600; 
+            --verde: #00D084; 
+            --rojo: #FF4D4D; 
+            --fondo: #F0F4F8; 
+            --blanco: #FFFFFF; 
+            --texto: #334E68;
         }
 
-        body {
-            background-color: var(--fondo);
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-            margin: 0;
-        }
-
-        .card {
-            background: var(--blanco);
-            width: 90%;
-            max-width: 380px;
-            padding: 2.5rem;
-            border-radius: 24px;
-            box-shadow: 0 15px 35px var(--sombra);
-            text-align: center;
-            border-top: 10px solid var(--naranja-yanbal);
-            transition: transform 0.3s ease;
-        }
-
-        .card:hover {
-            transform: translateY(-5px);
-        }
-
-        .icon-box {
-            font-size: 55px;
-            margin-bottom: 15px;
-            filter: drop-shadow(0 5px 10px rgba(0,0,0,0.1));
-        }
-
-        .brand-label {
-            color: var(--naranja-yanbal);
-            font-size: 0.75rem;
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 2.5px;
-            margin-bottom: 8px;
-            display: block;
-        }
-
-        h1 {
+        body { 
+            font-family: 'Outfit', sans-serif; 
+            background-color: var(--fondo); 
+            margin: 0; 
+            padding: 0; 
+            display: flex; 
+            justify-content: center; 
+            height: 100vh; 
+            overflow: hidden; 
             color: var(--texto);
-            font-size: 1.8rem;
-            margin: 10px 0;
-            font-weight: 700;
+        }
+        
+        .app-shell { 
+            width: 100%; 
+            max-width: 450px; 
+            background: var(--fondo); 
+            height: 100vh; 
+            display: flex; 
+            flex-direction: column; 
+        }
+        
+        /* Cabecera con la "H" naranja que pediste */
+        header { 
+            background: var(--naranja); 
+            padding: 30px 20px 50px; 
+            border-bottom-left-radius: 40px; 
+            border-bottom-right-radius: 40px; 
+            color: white; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            flex-shrink: 0; 
+            box-shadow: 0 10px 20px rgba(255,102,0,0.15);
         }
 
-        p {
-            color: #666;
-            font-size: 1rem;
-            line-height: 1.5;
-            margin-bottom: 25px;
+        .avatar { 
+            width: 50px; 
+            height: 50px; 
+            background: white; 
+            color: var(--naranja); 
+            border-radius: 50%; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            font-size: 1.5rem; 
+            font-weight: 800; 
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
 
-        .btn-main {
-            background-color: var(--naranja-yanbal);
-            color: white;
-            border: none;
-            width: 100%;
-            padding: 16px;
-            border-radius: 14px;
-            font-size: 1rem;
-            font-weight: 700;
-            cursor: pointer;
-            box-shadow: 0 8px 20px rgba(255, 102, 0, 0.25);
-            transition: all 0.3s ease;
+        /* Dashboard de Totales */
+        .stats-container { 
+            display: grid; 
+            grid-template-columns: 1fr 1fr; 
+            gap: 15px; 
+            margin: -30px 20px 15px; 
+            flex-shrink: 0; 
         }
 
-        .btn-main:hover {
-            background-color: var(--naranja-oscuro);
-            box-shadow: 0 10px 25px rgba(255, 102, 0, 0.35);
+        .stat-card { 
+            background: var(--blanco); 
+            padding: 12px; 
+            border-radius: 20px; 
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05); 
+            text-align: center; 
         }
 
-        footer {
-            position: absolute;
-            bottom: 20px;
-            color: #aaa;
-            font-size: 0.75rem;
-            letter-spacing: 0.5px;
+        .stat-card span { font-size: 0.65rem; font-weight: 700; color: #9FB3C8; text-transform: uppercase; }
+        .stat-card h2 { margin: 5px 0 0; font-size: 1rem; }
+
+        .main-content { 
+            padding: 0 20px; 
+            flex-grow: 1; 
+            display: flex; 
+            flex-direction: column; 
+            overflow: hidden; 
         }
 
-        strong {
-            color: #888;
+        .action-btns { display: flex; gap: 10px; margin-bottom: 15px; flex-shrink: 0; }
+        
+        .btn-action { 
+            flex: 1; 
+            padding: 14px; 
+            border: none; 
+            border-radius: 18px; 
+            font-weight: 700; 
+            cursor: pointer; 
+            font-family: inherit; 
+            font-size: 0.8rem; 
+            transition: 0.2s;
+        }
+
+        .btn-add { background: var(--naranja); color: white; }
+        .btn-view { background: #D9E2EC; color: #486581; }
+
+        /* Formulario con el campo de Producto */
+        #modal-form { 
+            display: none; 
+            background: white; 
+            padding: 20px; 
+            border-radius: 25px; 
+            margin-bottom: 15px; 
+            border: 1px solid #E4E7EB; 
+            flex-shrink: 0; 
+            animation: slideUp 0.3s ease-out;
+        }
+
+        .input-box { margin-bottom: 10px; }
+        .input-box label { font-size: 0.7rem; font-weight: 700; color: #9FB3C8; margin-bottom: 4px; display: block; }
+        
+        input, select { 
+            width: 100%; 
+            padding: 12px; 
+            border-radius: 12px; 
+            border: 2px solid #F1F3F5; 
+            background: #F8FAFC; 
+            outline: none; 
+            box-sizing: border-box; 
+            font-family: inherit;
+        }
+
+        input:focus { border-color: var(--naranja); background: white; }
+
+        /* Sección de Historial con Scroll Interno */
+        #list-section { 
+            flex-grow: 1; 
+            overflow-y: auto; 
+            padding-bottom: 20px; 
+            scrollbar-width: none; 
+        }
+        #list-section::-webkit-scrollbar { display: none; }
+
+        .history-grid { 
+            display: grid; 
+            grid-template-columns: 1fr 1fr; 
+            gap: 10px; 
+            padding-top: 5px; 
+        }
+        
+        .record-tile { 
+            background: white; 
+            padding: 12px; 
+            border-radius: 20px; 
+            position: relative; 
+            border: 1px solid #E4E7EB; 
+            animation: popIn 0.3s ease forwards;
+        }
+
+        .tile-name { font-weight: 700; font-size: 0.85rem; display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-top: 5px; }
+        .tile-product { font-size: 0.65rem; color: #829AB1; display: block; margin-bottom: 5px; }
+        .tile-price { font-weight: 800; font-size: 0.9rem; }
+
+        .tile-del { 
+            position: absolute; 
+            top: 8px; 
+            right: 8px; 
+            background: #F1F3F5; 
+            border: none; 
+            border-radius: 50%; 
+            width: 22px; 
+            height: 22px; 
+            font-size: 0.7rem; 
+            color: #9FB3C8; 
+            cursor: pointer; 
+        }
+
+        @keyframes slideUp { from { transform: translateY(10px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+        @keyframes popIn { from { transform: scale(0.9); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+        
+        footer { 
+            padding: 15px; 
+            text-align: center; 
+            font-size: 0.65rem; 
+            color: #9FB3C8; 
+            flex-shrink: 0; 
+            font-weight: 600;
         }
     </style>
 </head>
 <body>
+    <div class="app-shell">
+        <header>
+            <div>
+                <h1 style="font-size: 1.4rem; margin:0;">Hola, Helen ✨</h1>
+                <p style="margin:2px 0 0; font-size: 0.75rem; opacity: 0.8;">Gestión de Ventas Yanbal</p>
+            </div>
+            <div class="avatar">H</div>
+        </header>
 
-    <main class="card">
-        <div class="icon-box">📦</div>
-        <span class="brand-label">Gestión Pro</span>
-        <h1>¡Hola, Helen!</h1>
-        <p>¿Lista para organizar tus ventas y gastos de hoy?</p>
-        
-        <button class="btn-main">EMPEZAR AHORA</button>
-    </main>
+        <div class="stats-container">
+            <div class="stat-card">
+                <span>Por Cobrar</span>
+                <h2 id="total-revista" style="color: var(--verde);">$ 0</h2>
+            </div>
+            <div class="stat-card">
+                <span>Gastos</span>
+                <h2 id="total-gastos" style="color: var(--rojo);">$ 0</h2>
+            </div>
+        </div>
 
-    <footer>
-        V.1.0 | Desarrollado por <strong>rober-enrique-dev</strong>
-    </footer>
+        <div class="main-content">
+            <div class="action-btns">
+                <button id="btn-open" class="btn-action btn-add">+ REGISTRAR</button>
+                <button id="btn-toggle-list" class="btn-action btn-view">HISTORIAL</button>
+            </div>
 
+            <div id="modal-form">
+                <div class="input-box">
+                    <label>TIPO DE REGISTRO</label>
+                    <select id="tipo">
+                        <option value="Revista">💄 Venta Revista</option>
+                        <option value="Gasto">💸 Gasto Personal</option>
+                    </select>
+                </div>
+                <div class="input-box" id="box-cliente">
+                    <label>NOMBRE DEL CLIENTE</label>
+                    <input type="text" id="cliente" placeholder="¿Quién debe?">
+                </div>
+                <div class="input-box">
+                    <label>PRODUCTO / DETALLE</label>
+                    <input type="text" id="producto" placeholder="Ej: Perfume, Labial...">
+                </div>
+                <div class="input-box">
+                    <label>VALOR ($)</label>
+                    <input type="text" id="monto-visible" placeholder="0">
+                    <input type="hidden" id="monto-id">
+                </div>
+                <button id="btn-save" class="btn-action btn-add" style="width: 100%;">GUARDAR AHORA</button>
+            </div>
+
+            <div id="list-section" style="display: none;">
+                <h3 style="font-size: 0.75rem; color: #9FB3C8; margin-bottom: 10px; text-transform: uppercase;">Movimientos Guardados</h3>
+                <div class="history-grid" id="grid-container"></div>
+            </div>
+        </div>
+
+        <footer>SISTEMA EXCLUSIVO | BY ROBER-ENRIQUE-DEV</footer>
+    </div>
+    <script src="script.js"></script>
 </body>
 </html>
