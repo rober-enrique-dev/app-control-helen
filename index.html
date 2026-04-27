@@ -3,231 +3,87 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Helen Premium | Yanbal Edition</title>
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <title>Helen Premium</title>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     <link rel="manifest" href="manifest.json?v=1">
     <link rel="icon" type="image/png" href="icon.png?v=1">
-    <link rel="apple-touch-icon" href="icon.png?v=1">
     <meta name="theme-color" content="#FF6600">
 
     <style>
-        :root {
-            --naranja: #FF6600;
-            --naranja-suave: #FFF0E6;
-            --fondo: #F4F7F9;
-            --blanco: #FFFFFF;
-            --texto: #2D3436;
-            --verde: #00B894;
-            --rojo: #D63031;
-        }
+        :root { --naranja: #FF6600; --fondo: #F8F9FD; --verde: #00B894; --rojo: #FF3860; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Outfit', sans-serif; -webkit-tap-highlight-color: transparent; }
+        body { background: var(--fondo); height: 100vh; display: flex; flex-direction: column; overflow: hidden; }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Outfit', sans-serif; }
+        /* HEADER */
+        .header { background: linear-gradient(135deg, var(--naranja), #FF8C42); padding: 30px 25px 40px; border-bottom-left-radius: 40px; border-bottom-right-radius: 40px; display: flex; justify-content: space-between; align-items: center; }
+        .header h1 { color: white; font-size: 24px; font-weight: 800; }
+        .avatar { width: 50px; height: 50px; background: rgba(255,255,255,0.2); border: 2px solid white; border-radius: 15px; display: flex; justify-content: center; align-items: center; color: white; font-weight: 800; }
 
-        body { 
-            background-color: var(--fondo); 
-            color: var(--texto);
-            height: 100vh;
-            overflow: hidden; /* Evita que toda la pantalla rebote */
-        }
+        /* PESTAÑAS (TABS) - AQUÍ SE SEPARA TODO */
+        .tabs { display: flex; justify-content: space-around; padding: 0 20px; margin-top: -20px; gap: 10px; }
+        .tab-btn { background: white; border: none; padding: 12px 20px; border-radius: 15px; font-weight: 800; color: #AAA; flex: 1; box-shadow: 0 5px 15px rgba(0,0,0,0.05); font-size: 13px; }
+        .tab-btn.active { background: var(--naranja); color: white; }
 
-        /* CABECERA NARANJA */
-        .header {
-            background: var(--naranja);
-            padding: 30px 20px;
-            border-bottom-left-radius: 30px;
-            border-bottom-right-radius: 30px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 4px 15px rgba(255, 102, 0, 0.3);
-        }
+        /* RESUMEN SEGÚN PESTAÑA */
+        .summary { padding: 20px; }
+        .card-stat { background: white; padding: 20px; border-radius: 24px; text-align: center; box-shadow: 0 8px 25px rgba(0,0,0,0.05); }
+        .card-stat p { font-size: 11px; color: #999; text-transform: uppercase; font-weight: 700; margin-bottom: 5px; }
+        .card-stat h2 { font-size: 26px; font-weight: 800; }
 
-        .header-info h1 { color: white; font-size: 24px; font-weight: 800; }
-        .header-info p { color: rgba(255,255,255,0.8); font-size: 14px; }
+        /* LISTA */
+        #list-section { flex: 1; overflow-y: auto; padding: 0 20px 100px; }
+        .item-card { background: white; padding: 15px; border-radius: 20px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; animation: fadeIn 0.4s; }
+        .item-info h3 { font-size: 15px; font-weight: 800; }
+        .item-info span { font-size: 11px; color: #AAA; }
+        .item-price { font-size: 16px; font-weight: 800; }
 
-        .avatar {
-            width: 55px;
-            height: 55px;
-            background: rgba(255,255,255,0.2);
-            border: 2px solid white;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: white;
-            font-size: 24px;
-            font-weight: 800;
-        }
-
-        /* TARJETAS DE RESUMEN */
-        .summary {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-            padding: 20px;
-            margin-top: -30px;
-        }
-
-        .card-stat {
-            background: white;
-            padding: 15px;
-            border-radius: 20px;
-            text-align: center;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
-        }
-
-        .card-stat p { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: #636e72; font-weight: 600; }
-        .card-stat h2 { font-size: 18px; margin-top: 5px; }
-        .total-cobrar { color: var(--verde); }
-        .total-gastos { color: var(--rojo); }
-
-        /* LISTA DE DEUDORES (GRILLA DE 2 COLUMNAS) */
-        #list-section {
-            padding: 0 20px 100px 20px;
-            height: calc(100vh - 220px);
-            overflow-y: auto;
-        }
-
-        .grid-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr; /* AQUÍ ESTÁN LAS 2 COLUMNAS */
-            gap: 12px;
-        }
-
-        .user-card {
-            background: white;
-            padding: 12px;
-            border-radius: 15px;
-            position: relative;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.03);
-            border: 1px solid #eee;
-        }
-
-        .user-card .btn-delete {
-            position: absolute;
-            top: 5px;
-            right: 8px;
-            color: #ccc;
-            font-size: 16px;
-            cursor: pointer;
-        }
-
-        .user-card img { width: 24px; margin-bottom: 5px; }
-        .user-card h3 { font-size: 14px; font-weight: 800; color: #2d3436; text-transform: lowercase; }
-        .user-card p.prod { font-size: 10px; color: #b2bec3; margin: 2px 0; }
-        .user-card p.price { font-size: 14px; font-weight: 800; color: var(--verde); }
-
-        /* BOTÓN FLOTANTE */
-        .btn-add {
-            position: fixed;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: var(--naranja);
-            color: white;
-            padding: 15px 40px;
-            border-radius: 50px;
-            font-weight: 800;
-            box-shadow: 0 10px 20px rgba(255,102,0,0.4);
-            border: none;
-            font-size: 16px;
-        }
-
-        /* MODAL */
-        .modal {
-            position: fixed;
-            bottom: -100%;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.5);
-            transition: 0.4s;
-            display: flex;
-            align-items: flex-end;
-            z-index: 1000;
-        }
-
-        .modal.active { bottom: 0; }
-
-        .modal-content {
-            background: white;
-            width: 100%;
-            padding: 30px 20px;
-            border-top-left-radius: 30px;
-            border-top-right-radius: 30px;
-        }
-
-        input, select {
-            width: 100%;
-            padding: 15px;
-            margin-bottom: 15px;
-            border-radius: 12px;
-            border: 1px solid #eee;
-            background: #f9f9f9;
-            font-size: 16px;
-            outline: none;
-        }
-
-        .btn-save {
-            background: var(--naranja);
-            color: white;
-            width: 100%;
-            padding: 15px;
-            border: none;
-            border-radius: 12px;
-            font-weight: 800;
-            font-size: 16px;
-        }
+        /* BOTÓN Y MODAL */
+        .btn-add { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); background: var(--naranja); color: white; padding: 18px 45px; border-radius: 35px; font-weight: 800; border: none; box-shadow: 0 10px 25px rgba(255,102,0,0.4); z-index: 100; }
+        .modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); display: none; align-items: flex-end; z-index: 1000; }
+        .modal.active { display: flex; }
+        .modal-content { background: white; width: 100%; padding: 30px; border-top-left-radius: 40px; border-top-right-radius: 40px; }
+        input, select { width: 100%; padding: 16px; margin-bottom: 12px; border-radius: 15px; border: 2px solid #F0F0F0; font-size: 16px; outline: none; }
+        .btn-save { background: var(--naranja); color: white; width: 100%; padding: 18px; border: none; border-radius: 15px; font-weight: 800; }
     </style>
 </head>
 <body>
-
     <div class="header">
-        <div class="header-info">
-            <h1>Hola, Helen ✨</h1>
-            <p>Gestión de Ventas Yanbal</p>
-        </div>
+        <h1>Hola, Helen ✨</h1>
         <div class="avatar">H</div>
+    </div>
+
+    <div class="tabs">
+        <button class="tab-btn active" onclick="switchTab('yanbal')">REVISTA YANBAL</button>
+        <button class="tab-btn" onclick="switchTab('personales')">GASTOS PERSONALES</button>
     </div>
 
     <div class="summary">
         <div class="card-stat">
-            <p>Por Cobrar</p>
-            <h2 id="total-cobrar" class="total-cobrar">$ 0</h2>
-        </div>
-        <div class="card-stat">
-            <p>Gastos</p>
-            <h2 id="total-gastos" class="total-gastos">$ 0</h2>
+            <p id="label-total">Total Revista</p>
+            <h2 id="total-val">$ 0</h2>
         </div>
     </div>
 
-    <div id="list-section">
-        <div class="grid-container" id="grid-container">
-            </div>
-    </div>
+    <div id="list-section"><div id="list-container"></div></div>
 
-    <button class="btn-add" id="btn-open">+ REGISTRAR</button>
+    <button class="btn-add" id="btn-open">NUEVO REGISTRO</button>
 
     <div class="modal" id="modal-form">
         <div class="modal-content">
-            <h3 style="margin-bottom: 20px;">Nuevo Registro</h3>
-            <select id="tipo">
-                <option value="cobrar">Es una Venta (Cobrar)</option>
-                <option value="gasto">Es un Gasto</option>
+            <h2 style="margin-bottom: 20px;">Agregar Registro</h2>
+            <select id="input-tipo">
+                <option value="yanbal">Para la Revista Yanbal</option>
+                <option value="personales">Gasto Personal</option>
             </select>
-            <input type="text" id="cliente" placeholder="Nombre de la persona">
-            <input type="text" id="producto" placeholder="¿Qué producto es?">
-            <input type="text" id="monto-visible" placeholder="Monto (ej: 50.000)">
-            <input type="hidden" id="monto-id">
-            
-            <button class="btn-save" id="btn-save">GUARDAR REGISTRO</button>
-            <button onclick="document.getElementById('modal-form').classList.remove('active')" style="width:100%; background:none; border:none; margin-top:15px; color:#aaa;">Cerrar</button>
+            <input type="text" id="input-nombre" placeholder="¿Quién o qué es?">
+            <input type="text" id="input-detalle" placeholder="Detalle (Ej: Labial, Comida)">
+            <input type="text" id="input-visible" placeholder="Monto $">
+            <input type="hidden" id="input-real">
+            <button class="btn-save" id="btn-save">GUARDAR</button>
+            <button onclick="document.getElementById('modal-form').classList.remove('active')" style="width:100%; margin-top:15px; background:none; border:none; color:#AAA;">Cancelar</button>
         </div>
     </div>
-
     <script src="script.js"></script>
 </body>
 </html>
