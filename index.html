@@ -1,259 +1,233 @@
 <!DOCTYPE html>
 <html lang="es">
-<head<link rel="manifest" href="manifest.json">
-<link rel="icon" type="image/png" href="icon.png">
-<meta name="theme-color" content="#FF6600">>
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Helen Premium | Yanbal Edition</title>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="manifest" href="manifest.json?v=1">
+    <link rel="icon" type="image/png" href="icon.png?v=1">
+    <link rel="apple-touch-icon" href="icon.png?v=1">
+    <meta name="theme-color" content="#FF6600">
+
     <style>
-        :root { 
-            --naranja: #FF6600; 
-            --verde: #00D084; 
-            --rojo: #FF4D4D; 
-            --fondo: #F0F4F8; 
-            --blanco: #FFFFFF; 
-            --texto: #334E68;
+        :root {
+            --naranja: #FF6600;
+            --naranja-suave: #FFF0E6;
+            --fondo: #F4F7F9;
+            --blanco: #FFFFFF;
+            --texto: #2D3436;
+            --verde: #00B894;
+            --rojo: #D63031;
         }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Outfit', sans-serif; }
 
         body { 
-            font-family: 'Outfit', sans-serif; 
             background-color: var(--fondo); 
-            margin: 0; 
-            padding: 0; 
-            display: flex; 
-            justify-content: center; 
-            height: 100vh; 
-            overflow: hidden; 
             color: var(--texto);
-        }
-        
-        .app-shell { 
-            width: 100%; 
-            max-width: 450px; 
-            background: var(--fondo); 
-            height: 100vh; 
-            display: flex; 
-            flex-direction: column; 
-        }
-        
-        /* Cabecera con la "H" naranja que pediste */
-        header { 
-            background: var(--naranja); 
-            padding: 30px 20px 50px; 
-            border-bottom-left-radius: 40px; 
-            border-bottom-right-radius: 40px; 
-            color: white; 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center; 
-            flex-shrink: 0; 
-            box-shadow: 0 10px 20px rgba(255,102,0,0.15);
+            height: 100vh;
+            overflow: hidden; /* Evita que toda la pantalla rebote */
         }
 
-        .avatar { 
-            width: 50px; 
-            height: 50px; 
-            background: white; 
-            color: var(--naranja); 
-            border-radius: 50%; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            font-size: 1.5rem; 
-            font-weight: 800; 
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        /* CABECERA NARANJA */
+        .header {
+            background: var(--naranja);
+            padding: 30px 20px;
+            border-bottom-left-radius: 30px;
+            border-bottom-right-radius: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 15px rgba(255, 102, 0, 0.3);
         }
 
-        /* Dashboard de Totales */
-        .stats-container { 
-            display: grid; 
-            grid-template-columns: 1fr 1fr; 
-            gap: 15px; 
-            margin: -30px 20px 15px; 
-            flex-shrink: 0; 
+        .header-info h1 { color: white; font-size: 24px; font-weight: 800; }
+        .header-info p { color: rgba(255,255,255,0.8); font-size: 14px; }
+
+        .avatar {
+            width: 55px;
+            height: 55px;
+            background: rgba(255,255,255,0.2);
+            border: 2px solid white;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 24px;
+            font-weight: 800;
         }
 
-        .stat-card { 
-            background: var(--blanco); 
-            padding: 12px; 
-            border-radius: 20px; 
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05); 
-            text-align: center; 
+        /* TARJETAS DE RESUMEN */
+        .summary {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            padding: 20px;
+            margin-top: -30px;
         }
 
-        .stat-card span { font-size: 0.65rem; font-weight: 700; color: #9FB3C8; text-transform: uppercase; }
-        .stat-card h2 { margin: 5px 0 0; font-size: 1rem; }
-
-        .main-content { 
-            padding: 0 20px; 
-            flex-grow: 1; 
-            display: flex; 
-            flex-direction: column; 
-            overflow: hidden; 
+        .card-stat {
+            background: white;
+            padding: 15px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
         }
 
-        .action-btns { display: flex; gap: 10px; margin-bottom: 15px; flex-shrink: 0; }
-        
-        .btn-action { 
-            flex: 1; 
-            padding: 14px; 
-            border: none; 
-            border-radius: 18px; 
-            font-weight: 700; 
-            cursor: pointer; 
-            font-family: inherit; 
-            font-size: 0.8rem; 
-            transition: 0.2s;
+        .card-stat p { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: #636e72; font-weight: 600; }
+        .card-stat h2 { font-size: 18px; margin-top: 5px; }
+        .total-cobrar { color: var(--verde); }
+        .total-gastos { color: var(--rojo); }
+
+        /* LISTA DE DEUDORES (GRILLA DE 2 COLUMNAS) */
+        #list-section {
+            padding: 0 20px 100px 20px;
+            height: calc(100vh - 220px);
+            overflow-y: auto;
         }
 
-        .btn-add { background: var(--naranja); color: white; }
-        .btn-view { background: #D9E2EC; color: #486581; }
-
-        /* Formulario con el campo de Producto */
-        #modal-form { 
-            display: none; 
-            background: white; 
-            padding: 20px; 
-            border-radius: 25px; 
-            margin-bottom: 15px; 
-            border: 1px solid #E4E7EB; 
-            flex-shrink: 0; 
-            animation: slideUp 0.3s ease-out;
+        .grid-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr; /* AQUÍ ESTÁN LAS 2 COLUMNAS */
+            gap: 12px;
         }
 
-        .input-box { margin-bottom: 10px; }
-        .input-box label { font-size: 0.7rem; font-weight: 700; color: #9FB3C8; margin-bottom: 4px; display: block; }
-        
-        input, select { 
-            width: 100%; 
-            padding: 12px; 
-            border-radius: 12px; 
-            border: 2px solid #F1F3F5; 
-            background: #F8FAFC; 
-            outline: none; 
-            box-sizing: border-box; 
-            font-family: inherit;
+        .user-card {
+            background: white;
+            padding: 12px;
+            border-radius: 15px;
+            position: relative;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+            border: 1px solid #eee;
         }
 
-        input:focus { border-color: var(--naranja); background: white; }
-
-        /* Sección de Historial con Scroll Interno */
-        #list-section { 
-            flex-grow: 1; 
-            overflow-y: auto; 
-            padding-bottom: 20px; 
-            scrollbar-width: none; 
-        }
-        #list-section::-webkit-scrollbar { display: none; }
-
-        .history-grid { 
-            display: grid; 
-            grid-template-columns: 1fr 1fr; 
-            gap: 10px; 
-            padding-top: 5px; 
-        }
-        
-        .record-tile { 
-            background: white; 
-            padding: 12px; 
-            border-radius: 20px; 
-            position: relative; 
-            border: 1px solid #E4E7EB; 
-            animation: popIn 0.3s ease forwards;
+        .user-card .btn-delete {
+            position: absolute;
+            top: 5px;
+            right: 8px;
+            color: #ccc;
+            font-size: 16px;
+            cursor: pointer;
         }
 
-        .tile-name { font-weight: 700; font-size: 0.85rem; display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-top: 5px; }
-        .tile-product { font-size: 0.65rem; color: #829AB1; display: block; margin-bottom: 5px; }
-        .tile-price { font-weight: 800; font-size: 0.9rem; }
+        .user-card img { width: 24px; margin-bottom: 5px; }
+        .user-card h3 { font-size: 14px; font-weight: 800; color: #2d3436; text-transform: lowercase; }
+        .user-card p.prod { font-size: 10px; color: #b2bec3; margin: 2px 0; }
+        .user-card p.price { font-size: 14px; font-weight: 800; color: var(--verde); }
 
-        .tile-del { 
-            position: absolute; 
-            top: 8px; 
-            right: 8px; 
-            background: #F1F3F5; 
-            border: none; 
-            border-radius: 50%; 
-            width: 22px; 
-            height: 22px; 
-            font-size: 0.7rem; 
-            color: #9FB3C8; 
-            cursor: pointer; 
+        /* BOTÓN FLOTANTE */
+        .btn-add {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--naranja);
+            color: white;
+            padding: 15px 40px;
+            border-radius: 50px;
+            font-weight: 800;
+            box-shadow: 0 10px 20px rgba(255,102,0,0.4);
+            border: none;
+            font-size: 16px;
         }
 
-        @keyframes slideUp { from { transform: translateY(10px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
-        @keyframes popIn { from { transform: scale(0.9); opacity: 0; } to { transform: scale(1); opacity: 1; } }
-        
-        footer { 
-            padding: 15px; 
-            text-align: center; 
-            font-size: 0.65rem; 
-            color: #9FB3C8; 
-            flex-shrink: 0; 
-            font-weight: 600;
+        /* MODAL */
+        .modal {
+            position: fixed;
+            bottom: -100%;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            transition: 0.4s;
+            display: flex;
+            align-items: flex-end;
+            z-index: 1000;
+        }
+
+        .modal.active { bottom: 0; }
+
+        .modal-content {
+            background: white;
+            width: 100%;
+            padding: 30px 20px;
+            border-top-left-radius: 30px;
+            border-top-right-radius: 30px;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 12px;
+            border: 1px solid #eee;
+            background: #f9f9f9;
+            font-size: 16px;
+            outline: none;
+        }
+
+        .btn-save {
+            background: var(--naranja);
+            color: white;
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 12px;
+            font-weight: 800;
+            font-size: 16px;
         }
     </style>
 </head>
 <body>
-    <div class="app-shell">
-        <header>
-            <div>
-                <h1 style="font-size: 1.4rem; margin:0;">Hola, Helen ✨</h1>
-                <p style="margin:2px 0 0; font-size: 0.75rem; opacity: 0.8;">Gestión de Ventas Yanbal</p>
-            </div>
-            <div class="avatar">H</div>
-        </header>
 
-        <div class="stats-container">
-            <div class="stat-card">
-                <span>Por Cobrar</span>
-                <h2 id="total-revista" style="color: var(--verde);">$ 0</h2>
-            </div>
-            <div class="stat-card">
-                <span>Gastos</span>
-                <h2 id="total-gastos" style="color: var(--rojo);">$ 0</h2>
-            </div>
+    <div class="header">
+        <div class="header-info">
+            <h1>Hola, Helen ✨</h1>
+            <p>Gestión de Ventas Yanbal</p>
         </div>
-
-        <div class="main-content">
-            <div class="action-btns">
-                <button id="btn-open" class="btn-action btn-add">+ REGISTRAR</button>
-                <button id="btn-toggle-list" class="btn-action btn-view">HISTORIAL</button>
-            </div>
-
-            <div id="modal-form">
-                <div class="input-box">
-                    <label>TIPO DE REGISTRO</label>
-                    <select id="tipo">
-                        <option value="Revista">💄 Venta Revista</option>
-                        <option value="Gasto">💸 Gasto Personal</option>
-                    </select>
-                </div>
-                <div class="input-box" id="box-cliente">
-                    <label>NOMBRE DEL CLIENTE</label>
-                    <input type="text" id="cliente" placeholder="¿Quién debe?">
-                </div>
-                <div class="input-box">
-                    <label>PRODUCTO / DETALLE</label>
-                    <input type="text" id="producto" placeholder="Ej: Perfume, Labial...">
-                </div>
-                <div class="input-box">
-                    <label>VALOR ($)</label>
-                    <input type="text" id="monto-visible" placeholder="0">
-                    <input type="hidden" id="monto-id">
-                </div>
-                <button id="btn-save" class="btn-action btn-add" style="width: 100%;">GUARDAR AHORA</button>
-            </div>
-
-            <div id="list-section" style="display: none;">
-                <h3 style="font-size: 0.75rem; color: #9FB3C8; margin-bottom: 10px; text-transform: uppercase;">Movimientos Guardados</h3>
-                <div class="history-grid" id="grid-container"></div>
-            </div>
-        </div>
-
-        <footer>SISTEMA EXCLUSIVO | BY ROBER-ENRIQUE-DEV</footer>
+        <div class="avatar">H</div>
     </div>
+
+    <div class="summary">
+        <div class="card-stat">
+            <p>Por Cobrar</p>
+            <h2 id="total-cobrar" class="total-cobrar">$ 0</h2>
+        </div>
+        <div class="card-stat">
+            <p>Gastos</p>
+            <h2 id="total-gastos" class="total-gastos">$ 0</h2>
+        </div>
+    </div>
+
+    <div id="list-section">
+        <div class="grid-container" id="grid-container">
+            </div>
+    </div>
+
+    <button class="btn-add" id="btn-open">+ REGISTRAR</button>
+
+    <div class="modal" id="modal-form">
+        <div class="modal-content">
+            <h3 style="margin-bottom: 20px;">Nuevo Registro</h3>
+            <select id="tipo">
+                <option value="cobrar">Es una Venta (Cobrar)</option>
+                <option value="gasto">Es un Gasto</option>
+            </select>
+            <input type="text" id="cliente" placeholder="Nombre de la persona">
+            <input type="text" id="producto" placeholder="¿Qué producto es?">
+            <input type="text" id="monto-visible" placeholder="Monto (ej: 50.000)">
+            <input type="hidden" id="monto-id">
+            
+            <button class="btn-save" id="btn-save">GUARDAR REGISTRO</button>
+            <button onclick="document.getElementById('modal-form').classList.remove('active')" style="width:100%; background:none; border:none; margin-top:15px; color:#aaa;">Cerrar</button>
+        </div>
+    </div>
+
     <script src="script.js"></script>
 </body>
 </html>
